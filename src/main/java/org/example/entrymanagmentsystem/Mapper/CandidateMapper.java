@@ -18,8 +18,6 @@ public class CandidateMapper {
     public Candidate mapperToEntity(CandidateRequestDTO candidateRequestDTO) {
 
             Candidate candidate = new Candidate();
-
-
             List<Education> educationList = new ArrayList<>();
             List<Experience> experienceList = new ArrayList<>();
 
@@ -32,7 +30,7 @@ public class CandidateMapper {
             candidate.setName(candidateRequestDTO.getName());
             candidate.setPob(candidateRequestDTO.getPob());
             candidate.setMilitary_status(candidateRequestDTO.getMilitary_status());
-            candidate.setSSN(candidateRequestDTO.getSSN());
+            candidate.setSsn(candidateRequestDTO.getSsn());
 
                 for(EducationDTO educationDto : candidateRequestDTO.getEducations()) {
                 Education education = new Education();
@@ -75,9 +73,9 @@ public class CandidateMapper {
             candidateResponseDTO.setName(candidate.getName());
             candidateResponseDTO.setPob(candidate.getPob());
             candidateResponseDTO.setMilitary_status(candidate.getMilitary_status());
-            candidateResponseDTO.setSSN(candidate.getSSN());
+            candidateResponseDTO.setSSN(candidate.getSsn());
             return candidateResponseDTO;
         }
 
     }
-}
+

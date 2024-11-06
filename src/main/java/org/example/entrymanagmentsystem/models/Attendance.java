@@ -16,14 +16,15 @@ import java.time.LocalTime;
 @AllArgsConstructor
 public class Attendance {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate Date;
-    private LocalTime Time;
+
 
     public Attendance()
     {
-        this.Date=LocalDate.now();
-        this.Time=LocalTime.now();
+        this.Date= LocalDate.now();
+
     }
 
 //    @ManyToOne(cascade = CascadeType.ALL)

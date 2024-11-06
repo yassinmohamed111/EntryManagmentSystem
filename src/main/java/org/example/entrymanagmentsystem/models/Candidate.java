@@ -21,34 +21,34 @@ public class Candidate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank(message = "Name cannot be blank")
+
     private String name ;
-    @NotBlank(message = "email cannot be blank")
+
     private String email ;
 
 
-    @NotBlank(message = "Phone cannot be blank")
+
     private String phone ;
 
-    @NotBlank(message = "dob cannot be blank")
+
     private String dob;
 
-    @NotBlank(message = "Gender cannot be blank")
+
     private String gender ;
-    @NotBlank(message = "pob cannot be blank")
+
     private String pob ;
-    @NotBlank(message = "military status cannot be blank")
+
     private String military_status ;
     @Column(unique = true)
-    @NotBlank(message = "SSN cannot be blank")
-    private String SSN ;
-    @NotBlank(message = "address cannot be blank")
+
+    private String ssn ;
+
     private String address ;
     private String martial_status ;
     @Transient
     private  String role;
 
-   public Candidate()
+    public Candidate()
     {
         this.role = "candidate";
     }
@@ -56,6 +56,7 @@ public class Candidate {
 
     @OneToMany(mappedBy = "candidate"  , cascade = {CascadeType.DETACH , CascadeType.MERGE ,
             CascadeType.PERSIST , CascadeType.REFRESH})
+
     @JsonManagedReference("userDetailsEduReference")
     private List<Education> educations = new ArrayList<>();
 

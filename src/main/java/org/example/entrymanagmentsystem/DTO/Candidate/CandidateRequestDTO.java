@@ -18,7 +18,7 @@ public class CandidateRequestDTO {
     private String gender ;
     private String pob ;
     private String military_status ;
-    private String SSN ;
+    private String ssn ;
     private String address ;
     private String martial_status ;
     private List<EducationDTO> educations ;
