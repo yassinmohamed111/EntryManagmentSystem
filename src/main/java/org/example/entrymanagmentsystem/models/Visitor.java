@@ -37,6 +37,7 @@ public class Visitor {
     @NotBlank(message = "address cannot be blank")
     private String address ;
     private String visitee;
+    @Transient
     private String role;
 
     public Visitor(){
