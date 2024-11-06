@@ -26,15 +26,10 @@ public class Visitor {
 
     private String phone ;
 
-    @NotBlank(message = "dob cannot be blank")
     private String dob;
-
-    @NotBlank(message = "Gender cannot be blank")
     private String gender ;
-    @NotBlank(message = "pob cannot be blank")
     private String pob ;
     private String SSN ;
-    @NotBlank(message = "address cannot be blank")
     private String address ;
     private String visitee;
     @Transient
