@@ -27,5 +27,6 @@ public class Experience {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "candidate_id")
     @JsonBackReference("CandidatexpReference")
+
     private Candidate candidate;
 }

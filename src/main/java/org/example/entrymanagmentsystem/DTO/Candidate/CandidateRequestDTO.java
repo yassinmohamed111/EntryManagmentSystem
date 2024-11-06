@@ -1,10 +1,15 @@
 package org.example.entrymanagmentsystem.DTO.Candidate;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.example.entrymanagmentsystem.DTO.EducationDTO;
 import org.example.entrymanagmentsystem.DTO.ExperienceDTO;
 
 import java.util.List;
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CandidateRequestDTO {
     private String name ;
     private String email ;

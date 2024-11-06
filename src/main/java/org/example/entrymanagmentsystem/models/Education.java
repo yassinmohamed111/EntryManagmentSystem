@@ -4,7 +4,18 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.example.entrymanagmentsystem.DTO.EducationDTO;
+import org.example.entrymanagmentsystem.DTO.ExperienceDTO;
+
+import java.util.List;
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
+
 public class Education {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

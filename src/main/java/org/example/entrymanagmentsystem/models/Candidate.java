@@ -5,10 +5,17 @@ import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 @Entity
+@Setter
+@Getter
+@AllArgsConstructor
 public class Candidate {
     @Valid
     @Id
@@ -16,6 +23,9 @@ public class Candidate {
     private Long id;
     @NotBlank(message = "Name cannot be blank")
     private String name ;
+    @NotBlank(message = "email cannot be blank")
+    private String email ;
+
 
     @NotBlank(message = "Phone cannot be blank")
     private String phone ;
@@ -35,6 +45,7 @@ public class Candidate {
     @NotBlank(message = "address cannot be blank")
     private String address ;
     private String martial_status ;
+    @Transient
     private  String role;
 
    public Candidate()
