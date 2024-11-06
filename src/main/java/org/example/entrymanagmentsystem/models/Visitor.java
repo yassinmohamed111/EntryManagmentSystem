@@ -16,17 +16,14 @@ import java.util.List;
 @Entity
 @Setter
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
 public class Visitor {
     @Valid
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank(message = "Name cannot be blank")
     private String name ;
 
-    @NotBlank(message = "Phone cannot be blank")
     private String phone ;
 
     @NotBlank(message = "dob cannot be blank")
