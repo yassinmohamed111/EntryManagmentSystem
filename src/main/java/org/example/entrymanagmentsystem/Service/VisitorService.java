@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 
 public interface VisitorService {
-    VisitorRequestDTO createVisitor(@RequestBody VisitorRequestDTO visitor);
+    VisitorRequestDTO createVisitor(VisitorRequestDTO visitor);
 
     List<VisitorRequestDTO> getAllVisitors();
 
