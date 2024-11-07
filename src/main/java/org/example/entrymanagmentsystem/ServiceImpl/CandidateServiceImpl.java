@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class CandidateServiceImpl implements CandidateService {
     @Autowired
@@ -19,6 +21,12 @@ public class CandidateServiceImpl implements CandidateService {
     private AttendanceRepo attendanceRepo;
     @Autowired
     private CandidateMapper candidateMapper;
+
+    @Override
+    public List<Candidate> getAllCandidates() {
+        List<Candidate> candidate =  candidateRepo.findAll();
+        return candidate;
+    }
 
     @Transactional
     @Override
