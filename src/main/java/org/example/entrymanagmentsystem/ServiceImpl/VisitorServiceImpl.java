@@ -1,11 +1,10 @@
 package org.example.entrymanagmentsystem.ServiceImpl;
 
-import lombok.RequiredArgsConstructor;
 import org.example.entrymanagmentsystem.DTO.Visitor.VisitorRequestDTO;
-import org.example.entrymanagmentsystem.Repositories.AttendanceRepo;
+import org.example.entrymanagmentsystem.Repositories.EntryLogRepo;
 import org.example.entrymanagmentsystem.Repositories.VisitorRepo;
 import org.example.entrymanagmentsystem.Service.VisitorService;
-import org.example.entrymanagmentsystem.models.Attendance;
+import org.example.entrymanagmentsystem.models.EntryLog;
 import org.example.entrymanagmentsystem.models.Visitor;
 import org.example.entrymanagmentsystem.utils.DTOConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,17 +16,17 @@ import java.util.List;
 @Service
 public class VisitorServiceImpl implements VisitorService {
     @Autowired
-    AttendanceRepo attendanceRepo;
+    EntryLogRepo entryLogRepo;
     @Autowired
     VisitorRepo visitorRepo;
 
     @Override
     public VisitorRequestDTO createVisitor(@RequestBody VisitorRequestDTO visitor) {
-        Attendance attendance = new Attendance();
+        EntryLog entryLog = new EntryLog();
         Visitor v = visitorRepo.save(DTOConverter.convertToEntity(visitor, Visitor.class));
-        attendance.setRole(v.getRole());
-        attendance.setPerson_id(v.getId());
-        attendanceRepo.save(attendance);
+        entryLog.setRole(v.getRole());
+        entryLog.setPerson_id(v.getId());
+        entryLogRepo.save(entryLog);
         return DTOConverter.convertToEntity(v, VisitorRequestDTO.class);
     }
 

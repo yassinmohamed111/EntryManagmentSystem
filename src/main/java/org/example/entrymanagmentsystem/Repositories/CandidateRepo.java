@@ -5,4 +5,6 @@ import org.example.entrymanagmentsystem.models.Candidate;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CandidateRepo extends JpaRepository<Candidate, Long> {
+    boolean existsCandidateBySsn(String ssn);
+    Candidate findBySsn(String ssn);
 }
