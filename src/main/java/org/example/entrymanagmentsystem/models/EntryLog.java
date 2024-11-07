@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Setter
@@ -16,11 +17,13 @@ public class EntryLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate Date;
+    private LocalTime Time;
 
 
     public EntryLog()
     {
         this.Date= LocalDate.now();
+        this.Time= LocalTime.now();
 
     }
 

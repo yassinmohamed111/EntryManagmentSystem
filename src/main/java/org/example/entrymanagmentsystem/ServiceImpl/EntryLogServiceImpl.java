@@ -1,5 +1,6 @@
 package org.example.entrymanagmentsystem.ServiceImpl;
 
+import org.example.entrymanagmentsystem.DTO.EntryLogDTO;
 import org.example.entrymanagmentsystem.Repositories.CandidateRepo;
 import org.example.entrymanagmentsystem.Repositories.EntryLogRepo;
 import org.example.entrymanagmentsystem.Repositories.VisitorRepo;
@@ -20,14 +21,14 @@ public class EntryLogServiceImpl implements EntryLogService {
     @Autowired
     CandidateRepo candidateRepo;
 
-    public String createLog(String nid)
+    public String createLog(EntryLogDTO entryLogDTO)
     {
 
-        boolean visitorExists = visitorRepo.existsVisitorBySSN(nid);
-        boolean candidateExists = candidateRepo.existsCandidateBySsn(nid);
+        boolean visitorExists = visitorRepo.existsVisitorBySSN(entryLogDTO.getNid());
+        boolean candidateExists = candidateRepo.existsCandidateBySsn(entryLogDTO.getNid());
         if (visitorExists && !candidateExists)
         {
-            Visitor visitor = visitorRepo.findVisitorBySSN(nid);
+            Visitor visitor = visitorRepo.findVisitorBySSN(entryLogDTO.getNid());
             EntryLog entryLog = new EntryLog();
             entryLog.setPerson_id(visitor.getId());
             entryLog.setRole(visitor.getRole());
@@ -38,7 +39,7 @@ public class EntryLogServiceImpl implements EntryLogService {
         }
 
         else if(!visitorExists && candidateExists)  {
-            Candidate candidate = candidateRepo.findBySsn(nid);
+            Candidate candidate = candidateRepo.findBySsn(entryLogDTO.getNid());
             EntryLog entryLog = new EntryLog();
             entryLog.setPerson_id(candidate.getId());
             entryLog.setRole(candidate.getRole());
