@@ -42,6 +42,7 @@ public class EntryLogServiceImpl implements EntryLogService {
             EntryLog entryLog = new EntryLog();
             entryLog.setPerson_id(candidate.getId());
             entryLog.setRole(candidate.getRole());
+            entryLogRepo.save(entryLog);
             return  "logged in as candidate";
         }
         else {

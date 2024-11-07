@@ -16,7 +16,6 @@ public class EntryLogController {
     @PostMapping("{nid}")
     public String createLog(@PathVariable String nid)
     {
-        System.out.println(nid);
         return entryLogService.createLog(nid);
     }
 }
