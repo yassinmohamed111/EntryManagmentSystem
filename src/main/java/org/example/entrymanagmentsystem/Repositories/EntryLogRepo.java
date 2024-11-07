@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface EntryLogRepo extends JpaRepository<EntryLog, Long> {
     List<EntryLog> findAllByRole(String role);
-    List<EntryLog> findAllByName(String name);
+
 }

@@ -35,8 +35,5 @@ public class EntryLogController {
     {
         return  entryLogService.filterByrole(role);
     }
-    @PostMapping("{name}")
-    public List<EntryLogResponseDTO> filterByName(@PathVariable String name){
-        return entryLogService.filterByName(name);
-    }
+
 }

@@ -9,5 +9,5 @@ public interface CandidateService {
 
     List<Candidate> getAllCandidates();
     void createCandidate(CandidateRequestDTO candidateRequestDTO);
-    List<String> findAllByName(String name);
+
 }

@@ -74,11 +74,7 @@ public class EntryLogServiceImpl implements EntryLogService {
         return getAllLogs(entryLogs);
     }
 
-    @Override
-    public List<EntryLogResponseDTO> filterByName(String name) {
-      List<EntryLog> entryLogs = entryLogRepo.findAllByName(name);
-      return getAllLogs(entryLogs);
-    }
+
 
 
     public List<EntryLogResponseDTO> getAllLogs(List<EntryLog> entryLogs) {
