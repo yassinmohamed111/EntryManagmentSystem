@@ -9,6 +9,8 @@ import org.example.entrymanagmentsystem.models.Candidate;
 import org.example.entrymanagmentsystem.models.EntryLog;
 import org.example.entrymanagmentsystem.models.Visitor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,33 +23,35 @@ public class EntryLogServiceImpl implements EntryLogService {
     @Autowired
     CandidateRepo candidateRepo;
 
-    public String createLog(EntryLogDTO entryLogDTO)
-    {
 
-        boolean visitorExists = visitorRepo.existsVisitorBySSN(entryLogDTO.getNid());
-        boolean candidateExists = candidateRepo.existsCandidateBySsn(entryLogDTO.getNid());
-        if (visitorExists && !candidateExists)
-        {
-            Visitor visitor = visitorRepo.findVisitorBySSN(entryLogDTO.getNid());
-            EntryLog entryLog = new EntryLog();
-            entryLog.setPerson_id(visitor.getId());
-            entryLog.setRole(visitor.getRole());
-            entryLogRepo.save(entryLog);
+    public ResponseEntity<String> createLog(EntryLogDTO entryLogDTO) {
+        try {
+            boolean visitorExists = visitorRepo.existsVisitorBySSN(entryLogDTO.getNid());
+            boolean candidateExists = candidateRepo.existsCandidateBySsn(entryLogDTO.getNid());
 
-            return  "logged in as visitor";
+            if (visitorExists && !candidateExists) {
+                Visitor visitor = visitorRepo.findVisitorBySSN(entryLogDTO.getNid());
+                EntryLog entryLog = new EntryLog();
+                entryLog.setPerson_id(visitor.getId());
+                entryLog.setRole(visitor.getRole());
+                entryLogRepo.save(entryLog);
+                return new ResponseEntity<>("Logged in as visitor", HttpStatus.OK);
 
-        }
+            } else if (!visitorExists && candidateExists) {
+                Candidate candidate = candidateRepo.findBySsn(entryLogDTO.getNid());
+                EntryLog entryLog = new EntryLog();
+                entryLog.setPerson_id(candidate.getId());
+                entryLog.setRole(candidate.getRole());
+                entryLogRepo.save(entryLog);
+                return new ResponseEntity<>("Logged in as candidate", HttpStatus.OK);
 
-        else if(!visitorExists && candidateExists)  {
-            Candidate candidate = candidateRepo.findBySsn(entryLogDTO.getNid());
-            EntryLog entryLog = new EntryLog();
-            entryLog.setPerson_id(candidate.getId());
-            entryLog.setRole(candidate.getRole());
-            entryLogRepo.save(entryLog);
-            return  "logged in as candidate";
-        }
-        else {
-            return "not registered";
+            } else {
+                return new ResponseEntity<>("Not registered", HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception e) {
+            // Log the exception here if needed
+            return new ResponseEntity<>("Internal server error: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 }

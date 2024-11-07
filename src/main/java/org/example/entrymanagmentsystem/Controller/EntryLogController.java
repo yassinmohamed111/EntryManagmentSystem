@@ -16,7 +16,7 @@ public class EntryLogController {
     private EntryLogService entryLogService;
 
     @PostMapping()
-    public String createLog(@RequestBody EntryLogDTO entryLogDTO)
+    public ResponseEntity<String> createLog(@RequestBody EntryLogDTO entryLogDTO)
     {
         return entryLogService.createLog(entryLogDTO);
     }
