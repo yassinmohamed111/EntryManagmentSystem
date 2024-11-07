@@ -78,6 +78,7 @@ public class EntryLogServiceImpl implements EntryLogService {
 
     @Override
     public List<EntryLogResponseDTO> findAllByDate(EntryLogDateFilterDto dateFilterDto) {
+        System.out.println(dateFilterDto.getStartDate()  + " " +  dateFilterDto.getEndDate());
         List<EntryLog> entryLogs = entryLogRepo.findAllByDate(dateFilterDto.getStartDate(), dateFilterDto.getEndDate());
         return getAllLogs(entryLogs);
     }

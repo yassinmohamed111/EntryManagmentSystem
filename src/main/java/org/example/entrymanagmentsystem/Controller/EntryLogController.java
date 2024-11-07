@@ -37,8 +37,10 @@ public class EntryLogController {
         return  entryLogService.filterByrole(role);
     }
 
-    @GetMapping("filterDates")
+    @PostMapping("filterDates")
     public List<EntryLogResponseDTO> filterByDates(@RequestBody EntryLogDateFilterDto dateFilterDto){
+
+        System.out.println(dateFilterDto.getStartDate()  + " " +  dateFilterDto.getEndDate());
         return entryLogService.findAllByDate(dateFilterDto);
     }
 }

@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface EntryLogRepo extends JpaRepository<EntryLog, Long> {
     List<EntryLog> findAllByRole(String role);
-    @Query(value = "SELECT * FROM entry_managment_sys.entry_log WHERE date > ?1 AND date <= ?2", nativeQuery = true)
+    @Query(value = "SELECT * FROM entry_log WHERE date >= ?1 AND date <= ?2", nativeQuery = true)
     List<EntryLog> findAllByDate(LocalDate startDate, LocalDate endDate);
+
 }
