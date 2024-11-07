@@ -27,7 +27,7 @@ public class EntryLogController {
     @GetMapping
     public List<EntryLogResponseDTO> getAllLogs()
     {
-        return entryLogService.getAllLogs();
+        return entryLogService.findAllLogs();
     }
 
     @PostMapping("{role}")

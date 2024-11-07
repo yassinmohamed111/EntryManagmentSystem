@@ -67,6 +67,13 @@ public class EntryLogServiceImpl implements EntryLogService {
         return getAllLogs(entryLogs);
     }
 
+    @Override
+    public List<EntryLogResponseDTO> findAllLogs() {
+
+        List<EntryLog> entryLogs = entryLogRepo.findAll();
+        return getAllLogs(entryLogs);
+    }
+
 
     public List<EntryLogResponseDTO> getAllLogs(List<EntryLog> entryLogs) {
 
@@ -100,38 +107,6 @@ public class EntryLogServiceImpl implements EntryLogService {
         return entryLogResponseDTOs;
     }
 
-    @Override
-    public List<EntryLogResponseDTO> getAllLogs() {
 
-        List<EntryLog> entryLogs = entryLogRepo.findAll();
-        List<EntryLogResponseDTO> entryLogResponseDTOs = new ArrayList<EntryLogResponseDTO>();
-        for(EntryLog entryLog : entryLogs) {
-            if(entryLog.getRole().equals("visitor")) {
-
-                EntryLogResponseDTO entryLogResponseDTO = new EntryLogResponseDTO();
-                Visitor visitor = visitorRepo.findById(entryLog.getPerson_id()).orElseThrow();
-                entryLogResponseDTO.setName(visitor.getName());
-                entryLogResponseDTO.setSsn(visitor.getSSN());
-                entryLogResponseDTO.setRole(visitor.getRole());
-                entryLogResponseDTO.setPhoneNumber(visitor.getPhone());
-                entryLogResponseDTO.setDate(entryLog.getDate());
-                entryLogResponseDTO.setTime(entryLog.getTime());
-                entryLogResponseDTOs.add(entryLogResponseDTO);
-            }
-            else if (entryLog.getRole().equals("candidate"))
-            {
-                EntryLogResponseDTO entryLogResponseDTO = new EntryLogResponseDTO();
-                Candidate candidate = candidateRepo.findById(entryLog.getPerson_id()).orElseThrow();
-                entryLogResponseDTO.setName(candidate.getName());
-                entryLogResponseDTO.setSsn(candidate.getSsn());
-                entryLogResponseDTO.setRole(candidate.getRole());
-                entryLogResponseDTO.setPhoneNumber(candidate.getPhone());
-                entryLogResponseDTO.setDate(entryLog.getDate());
-                entryLogResponseDTO.setTime(entryLog.getTime());
-                entryLogResponseDTOs.add(entryLogResponseDTO);
-            }
-        }
-        return entryLogResponseDTOs;
-    }
 
 }
