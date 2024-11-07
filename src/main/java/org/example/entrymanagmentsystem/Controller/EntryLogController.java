@@ -27,6 +27,12 @@ public class EntryLogController {
     @GetMapping
     public List<EntryLogResponseDTO> getAllLogs()
     {
-        return entryLogService.getLogs();
+        return entryLogService.getAllLogs();
+    }
+
+    @PostMapping("{role}")
+    public List<EntryLogResponseDTO> filterByRole(@PathVariable  String role)
+    {
+        return  entryLogService.filterByrole(role);
     }
 }

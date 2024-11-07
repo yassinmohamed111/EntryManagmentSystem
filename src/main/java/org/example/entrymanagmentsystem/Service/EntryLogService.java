@@ -9,5 +9,7 @@ import java.util.List;
 
 public interface EntryLogService {
     public ResponseEntity<String> createLog(EntryLogDTO entryLogDTO);
-    public List<EntryLogResponseDTO> getLogs();
+    public List<EntryLogResponseDTO> getAllLogs();
+    public  List<EntryLogResponseDTO> filterByrole(String role);
+
 }
