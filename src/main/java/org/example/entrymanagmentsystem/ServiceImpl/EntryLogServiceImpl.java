@@ -1,6 +1,7 @@
 package org.example.entrymanagmentsystem.ServiceImpl;
 
 import org.example.entrymanagmentsystem.DTO.EntryLogDTO;
+import org.example.entrymanagmentsystem.DTO.EntryLogDateFilterDto;
 import org.example.entrymanagmentsystem.DTO.EntryLogResponseDTO;
 import org.example.entrymanagmentsystem.Repositories.CandidateRepo;
 import org.example.entrymanagmentsystem.Repositories.EntryLogRepo;
@@ -14,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,11 +61,16 @@ public class EntryLogServiceImpl implements EntryLogService {
     }
 
 
-
     @Override
     public List<EntryLogResponseDTO> filterByrole(String role) {
 
         List<EntryLog> entryLogs = entryLogRepo.findAllByRole(role);
+        return getAllLogs(entryLogs);
+    }
+
+    @Override
+    public List<EntryLogResponseDTO> findByDateBetweenOrderByDateAsc(EntryLogDateFilterDto dateFilterDto) {
+        List<EntryLog> entryLogs = entryLogRepo.findByDateBetweenOrderByDateAsc(dateFilterDto.getStartDate(), dateFilterDto.getEndDate());
         return getAllLogs(entryLogs);
     }
 
@@ -76,12 +83,12 @@ public class EntryLogServiceImpl implements EntryLogService {
 
 
 
-
+    @Override
     public List<EntryLogResponseDTO> getAllLogs(List<EntryLog> entryLogs) {
 
         List<EntryLogResponseDTO> entryLogResponseDTOs = new ArrayList<EntryLogResponseDTO>();
-        for(EntryLog entryLog : entryLogs) {
-            if(entryLog.getRole().equals("visitor")) {
+        for (EntryLog entryLog : entryLogs) {
+            if (entryLog.getRole().equals("visitor")) {
 
                 EntryLogResponseDTO entryLogResponseDTO = new EntryLogResponseDTO();
                 Visitor visitor = visitorRepo.findById(entryLog.getPerson_id()).orElseThrow();
@@ -92,9 +99,7 @@ public class EntryLogServiceImpl implements EntryLogService {
                 entryLogResponseDTO.setDate(entryLog.getDate());
                 entryLogResponseDTO.setTime(entryLog.getTime());
                 entryLogResponseDTOs.add(entryLogResponseDTO);
-            }
-            else if (entryLog.getRole().equals("candidate"))
-            {
+            } else if (entryLog.getRole().equals("candidate")) {
                 EntryLogResponseDTO entryLogResponseDTO = new EntryLogResponseDTO();
                 Candidate candidate = candidateRepo.findById(entryLog.getPerson_id()).orElseThrow();
                 entryLogResponseDTO.setName(candidate.getName());
@@ -108,7 +113,6 @@ public class EntryLogServiceImpl implements EntryLogService {
         }
         return entryLogResponseDTOs;
     }
-
 
 
 }

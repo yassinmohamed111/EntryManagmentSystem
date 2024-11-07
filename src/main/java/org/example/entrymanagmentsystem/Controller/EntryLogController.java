@@ -2,6 +2,7 @@ package org.example.entrymanagmentsystem.Controller;
 
 
 import org.example.entrymanagmentsystem.DTO.EntryLogDTO;
+import org.example.entrymanagmentsystem.DTO.EntryLogDateFilterDto;
 import org.example.entrymanagmentsystem.DTO.EntryLogResponseDTO;
 import org.example.entrymanagmentsystem.Service.EntryLogService;
 import org.example.entrymanagmentsystem.models.EntryLog;
@@ -36,4 +37,8 @@ public class EntryLogController {
         return  entryLogService.filterByrole(role);
     }
 
+    @GetMapping("filterDates")
+    public List<EntryLogResponseDTO> filterByDates(@RequestBody EntryLogDateFilterDto dateFilterDto){
+        return entryLogService.findByDateBetweenOrderByDateAsc(dateFilterDto);
+    }
 }
