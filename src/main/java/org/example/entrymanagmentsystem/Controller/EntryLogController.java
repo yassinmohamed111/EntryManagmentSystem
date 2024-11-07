@@ -25,6 +25,15 @@ public class EntryLogController {
         return entryLogService.createLog(entryLogDTO);
     }
 
+    @PostMapping("test")
+    public ResponseEntity<?> createLogs(@RequestBody List<EntryLogDTO> entryLogDTO)
+    {
+        for (EntryLogDTO entryLogDTO1 : entryLogDTO){
+            ResponseEntity.ok().body(entryLogService.createLog(entryLogDTO1));
+        }
+        return ResponseEntity.ok().body(entryLogService);
+    }
+
     @GetMapping
     public List<EntryLogResponseDTO> getAllLogs()
     {

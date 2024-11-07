@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("visitor")
 
@@ -17,6 +19,14 @@ public class VisitorController {
     @PostMapping
     public ResponseEntity<?> createVisitor(@RequestBody VisitorRequestDTO visitor) {
         return ResponseEntity.ok().body(visitorService.createVisitor(visitor));
+    }
+
+    @PostMapping("test")
+    public ResponseEntity<?> createVisitors(@RequestBody List<VisitorRequestDTO> visitor) {
+        for (VisitorRequestDTO visitorRequestDTO : visitor) {
+            ResponseEntity.ok().body(visitorService.createVisitor(visitorRequestDTO));
+        }
+        return ResponseEntity.ok().body(visitorService);
     }
 
     @GetMapping
