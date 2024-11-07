@@ -17,5 +17,5 @@ public interface EntryLogService {
 
     List<EntryLogResponseDTO> getAllLogs(List<EntryLog> entryLogs);
 
-    List<EntryLogResponseDTO> findByDateBetweenOrderByDateAsc(EntryLogDateFilterDto dateFilterDto);
+    List<EntryLogResponseDTO> findAllByDate(EntryLogDateFilterDto dateFilterDto);
 }

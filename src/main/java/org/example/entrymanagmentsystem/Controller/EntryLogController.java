@@ -39,6 +39,6 @@ public class EntryLogController {
 
     @GetMapping("filterDates")
     public List<EntryLogResponseDTO> filterByDates(@RequestBody EntryLogDateFilterDto dateFilterDto){
-        return entryLogService.findByDateBetweenOrderByDateAsc(dateFilterDto);
+        return entryLogService.findAllByDate(dateFilterDto);
     }
 }

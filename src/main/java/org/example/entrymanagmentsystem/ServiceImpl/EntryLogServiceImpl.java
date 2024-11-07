@@ -68,11 +68,6 @@ public class EntryLogServiceImpl implements EntryLogService {
         return getAllLogs(entryLogs);
     }
 
-    @Override
-    public List<EntryLogResponseDTO> findByDateBetweenOrderByDateAsc(EntryLogDateFilterDto dateFilterDto) {
-        List<EntryLog> entryLogs = entryLogRepo.findByDateBetweenOrderByDateAsc(dateFilterDto.getStartDate(), dateFilterDto.getEndDate());
-        return getAllLogs(entryLogs);
-    }
 
     @Override
     public List<EntryLogResponseDTO> findAllLogs() {
@@ -81,6 +76,11 @@ public class EntryLogServiceImpl implements EntryLogService {
         return getAllLogs(entryLogs);
     }
 
+    @Override
+    public List<EntryLogResponseDTO> findAllByDate(EntryLogDateFilterDto dateFilterDto) {
+        List<EntryLog> entryLogs = entryLogRepo.findAllByDate(dateFilterDto.getStartDate(), dateFilterDto.getEndDate());
+        return getAllLogs(entryLogs);
+    }
 
 
     @Override
