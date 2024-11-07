@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface EntryLogRepo extends JpaRepository<EntryLog, Long> {
     List<EntryLog> findAllByRole(String role);
-    List<EntryLog> findByDateBetweenOrderByDateAsc(LocalDate startDate, LocalDate endDate);
+   // List<EntryLog> findAllByDate(LocalDate date);
 }
