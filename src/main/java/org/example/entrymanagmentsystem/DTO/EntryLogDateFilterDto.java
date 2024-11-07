@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EntryLogDateFilterDto {
-    LocalDate Date ;
+    LocalDate startDate ;
+    LocalDate endDate ;
 
 }
