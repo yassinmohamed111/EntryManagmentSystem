@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("visitor")
 
 public class VisitorController {
@@ -18,6 +19,7 @@ public class VisitorController {
 
     @PostMapping
     public ResponseEntity<?> createVisitor(@RequestBody VisitorRequestDTO visitor) {
+        System.out.println(visitor.getVisitee());
         return ResponseEntity.ok().body(visitorService.createVisitor(visitor));
     }
 

@@ -40,7 +40,6 @@ public class Candidate {
 
     private String military_status ;
     @Column(unique = true)
-
     private String ssn ;
 
     private String address ;

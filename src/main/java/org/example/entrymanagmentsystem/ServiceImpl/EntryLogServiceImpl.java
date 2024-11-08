@@ -94,6 +94,7 @@ public class EntryLogServiceImpl implements EntryLogService {
                 EntryLogResponseDTO entryLogResponseDTO = new EntryLogResponseDTO();
                 Visitor visitor = visitorRepo.findById(entryLog.getPerson_id()).orElseThrow();
                 entryLogResponseDTO.setName(visitor.getName());
+                entryLogResponseDTO.setPerson_id(entryLog.getPerson_id());
                 entryLogResponseDTO.setSsn(visitor.getSSN());
                 entryLogResponseDTO.setRole(visitor.getRole());
                 entryLogResponseDTO.setPhoneNumber(visitor.getPhone());
@@ -104,6 +105,7 @@ public class EntryLogServiceImpl implements EntryLogService {
                 EntryLogResponseDTO entryLogResponseDTO = new EntryLogResponseDTO();
                 Candidate candidate = candidateRepo.findById(entryLog.getPerson_id()).orElseThrow();
                 entryLogResponseDTO.setName(candidate.getName());
+                entryLogResponseDTO.setPerson_id(entryLog.getPerson_id());
                 entryLogResponseDTO.setSsn(candidate.getSsn());
                 entryLogResponseDTO.setRole(candidate.getRole());
                 entryLogResponseDTO.setPhoneNumber(candidate.getPhone());

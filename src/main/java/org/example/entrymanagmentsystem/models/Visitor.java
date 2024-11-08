@@ -29,6 +29,7 @@ public class Visitor {
     private String dob;
     private String gender ;
     private String pob ;
+    @Column(unique = true)
     private String SSN ;
     private String address ;
     private String visitee;

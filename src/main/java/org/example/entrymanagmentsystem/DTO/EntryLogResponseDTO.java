@@ -14,7 +14,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 public class EntryLogResponseDTO {
     String name ;
-    String person_id ;
+    long person_id ;
     String role ;
     String ssn ;
     LocalDate date ;
