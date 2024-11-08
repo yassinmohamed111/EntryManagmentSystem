@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VisitorServiceImpl implements VisitorService {
@@ -20,6 +21,20 @@ public class VisitorServiceImpl implements VisitorService {
     @Autowired
     VisitorRepo visitorRepo;
 
+    @Override
+    public String checkVisitorExists(@RequestBody VisitorRequestDTO visitor) {
+        // Convert DTO to entity
+        Visitor visitorUnderInspection = DTOConverter.convertToEntity(visitor, Visitor.class);
+
+        // Check if the visitor exists based on a unique field (e.g., email)
+        Optional<Visitor> existingVisitor = visitorRepo.findBySSN(visitorUnderInspection.getSSN());
+
+        if (existingVisitor.isPresent()) {
+            return "Visitor already exists";
+        } else {
+            return "Visitor does not exist";
+        }
+    }
     @Override
     public VisitorRequestDTO createVisitor(@RequestBody VisitorRequestDTO visitor) {
         EntryLog entryLog = new EntryLog();

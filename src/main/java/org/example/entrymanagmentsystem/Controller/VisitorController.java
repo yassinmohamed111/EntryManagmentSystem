@@ -4,10 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.example.entrymanagmentsystem.DTO.Visitor.VisitorRequestDTO;
 import org.example.entrymanagmentsystem.Service.VisitorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @CrossOrigin("*")
@@ -19,8 +22,13 @@ public class VisitorController {
 
     @PostMapping
     public ResponseEntity<?> createVisitor(@RequestBody VisitorRequestDTO visitor) {
-        System.out.println(visitor.getVisitee());
-        return ResponseEntity.ok().body(visitorService.createVisitor(visitor));
+        if (Objects.equals(visitorService.checkVisitorExists(visitor), "Visitor does not exist")) {
+            System.out.println(visitor.getVisitee());
+            return ResponseEntity.ok().body(visitorService.createVisitor(visitor));
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).build();
+        }
     }
 
     @PostMapping("test")
