@@ -21,28 +21,42 @@ public class VisitorServiceImpl implements VisitorService {
     @Autowired
     VisitorRepo visitorRepo;
 
-    @Override
-    public String checkVisitorExists(@RequestBody VisitorRequestDTO visitor) {
-        // Convert DTO to entity
-        Visitor visitorUnderInspection = DTOConverter.convertToEntity(visitor, Visitor.class);
-
-        // Check if the visitor exists based on a unique field (e.g., email)
-        Optional<Visitor> existingVisitor = visitorRepo.findBySSN(visitorUnderInspection.getSSN());
-
-        if (existingVisitor.isPresent()) {
-            return "Visitor already exists";
-        } else {
-            return "Visitor does not exist";
-        }
-    }
+//    @Override
+//    public String checkVisitorExists(@RequestBody VisitorRequestDTO visitor) {
+//        // Convert DTO to entity
+//        Visitor visitorUnderInspection = DTOConverter.convertToEntity(visitor, Visitor.class);
+//
+//        // Check if the visitor exists based on a unique field (e.g., email)
+//        Optional<Visitor> existingVisitor = visitorRepo.findBySSN(visitorUnderInspection.getSSN());
+//
+//        if (existingVisitor.isPresent()) {
+//            return "Visitor already exists";
+//        } else {
+//            return "Visitor does not exist";
+//        }
+//    }
     @Override
     public VisitorRequestDTO createVisitor(@RequestBody VisitorRequestDTO visitor) {
-        EntryLog entryLog = new EntryLog();
-        Visitor v = visitorRepo.save(DTOConverter.convertToEntity(visitor, Visitor.class));
-        entryLog.setRole(v.getRole());
-        entryLog.setPerson_id(v.getId());
-        entryLogRepo.save(entryLog);
-        return DTOConverter.convertToEntity(v, VisitorRequestDTO.class);
+
+        if(visitorRepo.existsVisitorBySSN(visitor.getSSN()))
+        {
+            EntryLog entryLog = new EntryLog();
+            Visitor v = visitorRepo.findVisitorBySSN(visitor.getSSN());
+            entryLog.setRole(v.getRole());
+            entryLog.setPerson_id(v.getId());
+            entryLogRepo.save(entryLog);
+            return null;
+        }
+        else
+        {
+            EntryLog entryLog = new EntryLog();
+            Visitor v = visitorRepo.save(DTOConverter.convertToEntity(visitor, Visitor.class));
+            entryLog.setRole(v.getRole());
+            entryLog.setPerson_id(v.getId());
+            entryLogRepo.save(entryLog);
+            return DTOConverter.convertToEntity(v, VisitorRequestDTO.class);
+        }
+
     }
 
     @Override

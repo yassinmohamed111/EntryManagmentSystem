@@ -22,13 +22,11 @@ public class VisitorController {
 
     @PostMapping
     public ResponseEntity<?> createVisitor(@RequestBody VisitorRequestDTO visitor) {
-        if (Objects.equals(visitorService.checkVisitorExists(visitor), "Visitor does not exist")) {
+
             System.out.println(visitor.getVisitee());
             return ResponseEntity.ok().body(visitorService.createVisitor(visitor));
-        }
-        else {
-            return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).build();
-        }
+
+
     }
 
     @PostMapping("test")
