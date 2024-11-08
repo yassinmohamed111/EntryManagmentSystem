@@ -23,25 +23,13 @@ public class Candidate {
     private Long id;
 
     private String name ;
-
     private String email ;
-
-
-
     private String phone ;
-
-
     private String dob;
-
-
     private String gender ;
-
     private String pob ;
-
     private String military_status ;
-    @Column(unique = true)
     private String ssn ;
-
     private String address ;
     private String martial_status ;
     @Transient

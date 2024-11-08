@@ -20,6 +20,7 @@ public class EntryLog {
     private LocalTime Time;
 
 
+
     public EntryLog()
     {
         this.Date= LocalDate.now();
